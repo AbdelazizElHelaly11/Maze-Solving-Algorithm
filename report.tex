@@ -1,0 +1,181 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\title{Maze Solving Algorithms: A Comprehensive Analysis}
+\author{AI Maze Solving Project}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+This report presents a comprehensive analysis of various maze-solving algorithms implemented in Python. The project encompasses both traditional search algorithms and modern machine learning approaches, providing a diverse set of solutions for maze navigation problems.
+
+\section{Traditional Search Algorithms}
+
+\subsection{Breadth-First Search (BFS)}
+Breadth-First Search is an uninformed search algorithm that explores all nodes at the present depth before moving to nodes at the next depth level. In the context of maze solving:
+
+\begin{itemize}
+    \item Uses a queue data structure for node exploration
+    \item Guarantees the shortest path to the goal
+    \item Time complexity: $O(V + E)$ where V is vertices and E is edges
+    \item Space complexity: $O(V)$
+\end{itemize}
+
+\subsection{Depth-First Search (DFS)}
+Depth-First Search explores as far as possible along each branch before backtracking:
+
+\begin{itemize}
+    \item Uses a stack data structure (implemented recursively)
+    \item May not find the shortest path
+    \item Time complexity: $O(V + E)$
+    \item Space complexity: $O(V)$
+\end{itemize}
+
+\subsection{A* Search Algorithm}
+A* is an informed search algorithm that uses a heuristic function to estimate the cost to reach the goal:
+
+\begin{itemize}
+    \item Uses priority queue for node exploration
+    \item Combines uniform-cost search and greedy best-first search
+    \item Heuristic function: $f(n) = g(n) + h(n)$
+    \begin{itemize}
+        \item $g(n)$: cost from start to current node
+        \item $h(n)$: estimated cost from current node to goal
+    \end{itemize}
+    \item Guarantees optimal solution if heuristic is admissible
+\end{itemize}
+
+\subsection{Iterative Deepening Search (IDS)}
+IDS combines the benefits of BFS and DFS:
+
+\begin{itemize}
+    \item Performs DFS with increasing depth limits
+    \item Guarantees optimal solution
+    \item Space complexity: $O(d)$ where d is depth
+    \item Time complexity: $O(b^d)$ where b is branching factor
+\end{itemize}
+
+\subsection{Uniform Cost Search (UCS)}
+UCS is a variant of Dijkstra's algorithm:
+
+\begin{itemize}
+    \item Explores nodes in order of their path cost
+    \item Uses priority queue for node selection
+    \item Guarantees optimal solution
+    \item Time complexity: $O((V + E)\log V)$
+\end{itemize}
+
+\section{Machine Learning Approaches}
+
+\subsection{Q-Learning}
+Q-Learning is a model-free reinforcement learning algorithm:
+
+\begin{itemize}
+    \item Learns optimal policy through trial and error
+    \item Q-value update formula:
+    \[Q(s,a) \leftarrow Q(s,a) + \alpha[r + \gamma \max_{a'}Q(s',a') - Q(s,a)]\]
+    where:
+    \begin{itemize}
+        \item $\alpha$: learning rate
+        \item $\gamma$: discount factor
+        \item $r$: reward
+        \item $s'$: next state
+        \item $a'$: next action
+    \end{itemize}
+    \item Uses epsilon-greedy strategy for exploration
+    \item Maintains Q-table for state-action pairs
+\end{itemize}
+
+\subsection{Genetic Algorithm}
+The genetic algorithm approach uses evolutionary principles:
+
+\begin{itemize}
+    \item Population-based optimization
+    \item Key components:
+    \begin{itemize}
+        \item Chromosome representation: sequence of moves
+        \item Fitness function: based on path length and goal achievement
+        \item Selection: tournament or roulette wheel
+        \item Crossover: single-point or uniform
+        \item Mutation: random move changes
+    \end{itemize}
+    \item Parameters:
+    \begin{itemize}
+        \item Population size: 500
+        \item Mutation rate: 0.2
+        \item Number of generations: 500
+    \end{itemize}
+\end{itemize}
+
+\section{Local Search Algorithms}
+
+\subsection{Hill Climbing}
+Hill Climbing is a local search algorithm:
+
+\begin{itemize}
+    \item Iteratively moves to better neighboring solutions
+    \item Can get stuck in local optima
+    \item No backtracking
+    \item Simple implementation but limited by local optima
+\end{itemize}
+
+\subsection{Simulated Annealing}
+Simulated Annealing is a probabilistic technique:
+
+\begin{itemize}
+    \item Inspired by annealing in metallurgy
+    \item Allows occasional moves to worse solutions
+    \item Temperature parameter controls exploration
+    \item Gradually reduces temperature to focus on exploitation
+\end{itemize}
+
+\section{Performance Analysis}
+
+\subsection{Metrics}
+The project tracks various performance metrics:
+
+\begin{itemize}
+    \item Success rate
+    \item Steps per episode
+    \item Training time
+    \item Path length
+    \item Memory usage
+\end{itemize}
+
+\subsection{Visualization}
+The project includes visualization tools for:
+
+\begin{itemize}
+    \item Real-time maze solving
+    \item Path tracking
+    \item Performance comparison
+    \item Algorithm behavior analysis
+\end{itemize}
+
+\section{Conclusion}
+This project demonstrates the effectiveness of various approaches to maze solving, from traditional search algorithms to modern machine learning techniques. Each method has its strengths and weaknesses, making them suitable for different scenarios and requirements.
+
+\section{Future Work}
+Potential areas for improvement and extension:
+
+\begin{itemize}
+    \item Implementation of additional algorithms
+    \item Enhanced visualization capabilities
+    \item Performance optimization
+    \item Integration of deep learning approaches
+    \item Multi-agent scenarios
+\end{itemize}
+
+\end{document} 
