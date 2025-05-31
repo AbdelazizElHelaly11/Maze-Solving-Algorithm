@@ -1,125 +1,151 @@
-# Maze Solving Algorithms Project
+# 🧠 Maze Solving Algorithms Project
 
-This project implements various search algorithms and machine learning approaches to solve maze navigation problems. The project includes both traditional search algorithms and modern machine learning techniques.
+This project implements and compares a wide range of algorithms to solve maze navigation problems, using both **traditional search methods** and **modern machine learning approaches**. The maze environment is built with `pyamaze`, and performance is evaluated on a 100×100 grid.
 
-## Project Structure
+---
 
-The project contains the following main components:
+## 📁 Project Structure
 
-### Search Algorithms
-- `Astar.py` - A* search algorithm implementation
-- `BFS.py` - Breadth-First Search implementation
-- `DFS.py` - Depth-First Search implementation
-- `IDS.py` - Iterative Deepening Search implementation
-- `UCS.PY` - Uniform Cost Search implementation
-- `Greedy-search.py` - Greedy Best-First Search implementation
-- `Hill_Climbing.py` - Hill Climbing algorithm implementation
-- `sim_annealing.py` - Simulated Annealing implementation
+```text
+Maze/
+├── algorithms/               # Algorithm implementations
+│   ├── Astar.py             # A* Search
+│   ├── BFS.py               # Breadth-First Search
+│   ├── DFS.py               # Depth-First Search
+│   ├── IDS.py               # Iterative Deepening Search
+│   ├── UCS.py               # Uniform Cost Search
+│   ├── Greedy-search.py     # Greedy Best-First Search
+│   ├── Hill_Climbing.py     # Hill Climbing
+│   ├── sim_annealing.py     # Simulated Annealing
+│   ├── Qlearning.py         # Q-Learning (Reinforcement Learning)
+│   └── genetic_algo.py      # Genetic Algorithm
+│
+├── core/                    # Core maze and environment logic
+│   ├── maze.py              # Maze generation and control
+│   └── pyMaze.py            # Maze environment and data structures
+│
+├── utils/                   # Utilities and tools
+│   ├── visuals.py           # Visualization utilities
+│   └── performance.py       # Performance measurement and logging
+│
+├── AI_Report.pdf            # Detailed analysis and algorithm report
+└── README.md                # Project documentation
+```
 
-### Machine Learning Approaches
-- `Qlearning.py` - Q-Learning implementation for maze navigation
-- `genetic_algo.py` - Genetic Algorithm implementation
+---
 
-### Support Files
-- `maze.py` - Core maze generation and visualization
-- `visuals.py` - Visualization utilities
-- `performance.py` - Performance measurement tools
-- `pyMaze.py` - Maze environment implementation
+## 🔍 Algorithms Implemented
 
-## Features
+### 🔹 Traditional Search
 
-1. **Multiple Search Algorithms**
-   - Traditional graph search algorithms (BFS, DFS, A*, etc.)
-   - Local search algorithms (Hill Climbing, Simulated Annealing)
-   - Each algorithm is optimized for maze navigation
+* **BFS** — Guarantees shortest path, complete
+* **DFS** — Fast but not optimal or complete
+* **UCS** — Optimal with cost, variant of Dijkstra’s
+* **IDS** — Combines DFS space efficiency and BFS completeness
+* **A**\* — Uses cost and heuristic (Manhattan distance)
 
-2. **Machine Learning Solutions**
-   - Q-Learning with customizable parameters
-   - Genetic Algorithm with configurable population size and mutation rate
-   - Performance tracking and visualization
+### 🔹 Heuristic & Local Search
 
-3. **Visualization Tools**
-   - Real-time maze solving visualization
-   - Path tracking and performance metrics
-   - Customizable maze generation
+* **Greedy Best-First** — Fast but prone to suboptimal paths
+* **Hill Climbing** — Simple local optimizer
+* **Simulated Annealing** — Escapes local optima using probabilistic decisions
 
-## Requirements
+### 🔹 Machine Learning
 
-- Python 3.x
-- Required packages:
-  - numpy
-  - random
-  - json
-  - time
-  - pyamaze
+* **Q-Learning** — Reinforcement learning with Q-table
+* **Genetic Algorithm** — Evolutionary method for sequence optimization
 
-## Usage
+---
 
-### Running Search Algorithms
+## 🧠 Features
+
+* ✅ Multiple Search and ML Algorithms
+* 📈 Real-time Visualization
+* 🧪 Performance Metrics and Comparisons
+* 🧚 Evolutionary & Learning-based Solutions
+
+---
+
+## 🧹 Problem Setup
+
+* **Grid**: 100×100 maze
+* **Start**: Top-left corner `(1, 1)`
+* **Goal**: Bottom-right corner `(100, 100)`
+* **Actions**: N, S, E, W
+* **Constraints**: Transitions blocked by walls
+
+---
+
+## 💻 Usage Examples
+
+### ▶️ Run BFS (or any other search)
 
 ```python
 from pyamaze import maze, agent
-from BFS import bfs  # or any other algorithm
+from BFS import bfs
 
-# Create a maze
 m = maze()
 m.CreateMaze()
-
-# Run the algorithm
 path = bfs(m)
 
-# Visualize the solution
 a = agent(m, footprints=True)
 m.tracePath({a: path})
 m.run()
 ```
 
-### Running Q-Learning
+### ▶️ Run Q-Learning
 
 ```python
 from Qlearning import QLearningMaze
+from pyamaze import maze
 
-# Create maze and initialize Q-Learning
 m = maze(20, 20)
 m.CreateMaze()
-q_learning_agent = QLearningMaze(m, ['N', 'E', 'W', 'S'])
+q_agent = QLearningMaze(m, ['N', 'E', 'W', 'S'])
+q_agent.train(episodes=1000)
 
-# Train the agent
-q_learning_agent.train(episodes=1000)
-
-# Get and visualize the solution
-policy = q_learning_agent.get_policy()
-path = q_learning_agent.generate_path((1, 1), m._goal, policy)
+policy = q_agent.get_policy()
+path = q_agent.generate_path((1, 1), m._goal, policy)
 ```
 
-### Running Genetic Algorithm
+### ▶️ Run Genetic Algorithm
 
 ```python
 from genetic_algo import genetic_algorithm_maze
+from pyamaze import maze
 
-# Create maze and run genetic algorithm
 m = maze()
 m.CreateMaze()
-gene_pool = ['N', 'E', 'S', 'W']
-path = genetic_algorithm_maze(m, gene_pool, f_thres=0, ngen=500, pmut=0.2)
+path = genetic_algorithm_maze(m, ['N', 'E', 'S', 'W'], f_thres=0, ngen=500, pmut=0.2)
 ```
 
-## Performance Metrics
+---
 
-The project includes tools to measure and compare the performance of different algorithms:
-- Success rate tracking
-- Steps per episode
-- Training time measurement
-- Path length comparison
 
-## Contributing
+## 📚 Report
 
-Feel free to contribute to this project by:
-1. Adding new algorithms
-2. Improving existing implementations
-3. Adding new features or visualizations
-4. Reporting bugs or suggesting improvements
+Full details on algorithm design, evaluation, and results are documented.
 
-## License
+---
 
-This project is open source and available under the MIT License. 
+## 🔧 Requirements
+
+* Python 3.x
+* Required packages:
+
+  * `numpy`
+  * `random`
+  * `time`
+  * `pyamaze`
+
+Install with:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+
+
+
